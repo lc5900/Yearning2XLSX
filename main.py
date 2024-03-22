@@ -4,30 +4,30 @@ import sys
 import json
 
 
-def xw_to_excel(data, fileName):  # xlsxwriter库储存数据到excel
-    workbook = xw.Workbook(fileName)  # 创建工作簿
-    worksheet1 = workbook.add_worksheet("sheet1")  # 创建子表
-    worksheet1.activate()  # 激活表
-    # 获取data[0]的所有json key
-    title = data[0].keys()  # 设置表头
-    worksheet1.write_row('A1', title)  # 从A1单元格开始写入表头
-    i = 2  # 从第二行开始写入数据
+def xw_to_excel(data, file_name):  # xlsxwriter library stores data to excel
+    workbook = xw.Workbook(file_name)  # Creating workbooks
+    worksheet1 = workbook.add_worksheet("sheet1")  # Creating worksheet
+    worksheet1.activate()  # activate table
+    # Get all json keys for data[0]
+    title = data[0].keys()  # Setting the table header
+    worksheet1.write_row('A1', title)  # Write the table header starting from cell A1
+    i = 2  # Write data from the second line
     for j in range(len(data)):
-        insertData = []
+        insert_data = []
         for k in data[j].keys():
-            insertData.append(data[j][k])
+            insert_data.append(data[j][k])
         row = 'A' + str(i)
-        worksheet1.write_row(row, insertData)
+        worksheet1.write_row(row, insert_data)
         i += 1
-    workbook.close()  # 关闭表
+    workbook.close()  # close table
 
 
 if __name__ == '__main__':
-    # 检查是否提供了命令行参数
+    # Check if command line arguments are provided
     if len(sys.argv) != 2:
-        print("请拖入一个文件到脚本中")
+        print("Please input a filename")
     else:
-        # 获取文件路径
+        # Get file path
         file_path = sys.argv[1]
         # Construct the output file name by changing the extension to '.xlsx'
         output_file_path = file_path.rsplit('.', 1)[0] + '.xlsx'
